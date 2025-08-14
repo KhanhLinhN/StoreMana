@@ -1,13 +1,13 @@
 import path from 'node:path';
 
 import { Injectable } from '@nestjs/common';
-import type { ConfigService } from '@nestjs/config';
+import { ConfigService } from '@nestjs/config';
 import type { ThrottlerOptions } from '@nestjs/throttler';
 import type { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import parse from 'parse-duration';
 
-import { UserSubscriber } from '../../entity-subscribers/user-subscriber.ts';
-import { SnakeNamingStrategy } from '../../snake-naming.strategy.ts';
+import { UserSubscriber } from '../../entity-subscribers/user-subscriber';
+import { SnakeNamingStrategy } from '../../snake-naming.strategy';
 
 @Injectable()
 export class ApiConfigService {
@@ -118,7 +118,7 @@ export class ApiConfigService {
       subscribers: [UserSubscriber],
       migrationsRun: true,
       logging: this.getBoolean('ENABLE_ORM_LOGS'),
-      namingStrategy: new SnakeNamingStrategy(),
+      namingStrategy: new SnakeNamingStrategy()
     };
   }
 

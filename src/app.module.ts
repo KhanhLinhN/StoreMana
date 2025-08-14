@@ -43,21 +43,28 @@ import { SharedModule } from './shared/shared.module.ts';
       isGlobal: true,
       envFilePath: '.env',
     }),
-    TypeOrmModule.forRootAsync({
-      imports: [SharedModule],
-      useFactory: (configService: ApiConfigService) =>
-        configService.postgresConfig,
-      inject: [ApiConfigService],
-      dataSourceFactory: (options) => {
-        if (!options) {
-          throw new Error('Invalid options passed');
-        }
+    // TypeOrmModule.forRootAsync({
+    //   imports: [SharedModule],
+    //   useFactory: (configService: ApiConfigService) =>
+    //     configService.postgresConfig,
+    //   inject: [ApiConfigService],
+    //   dataSourceFactory: (options) => {
+    //     if (!options) {
+    //       throw new Error('Invalid options passed');
+    //     }
 
-        return Promise.resolve(
-          addTransactionalDataSource(new DataSource(options)),
-        );
-      },
+    //     return Promise.resolve(
+    //       addTransactionalDataSource(new DataSource(options)),
+    //     );
+    //   },
+    // }),
+    TypeOrmModule.forRoot({
+      type: 'postgres',
+      url: process.env.DATABASE_URL,
+      autoLoadEntities: true,
+      synchronize: true
     }),
+
     // eslint-disable-next-line canonical/id-match
     I18nModule.forRootAsync({
       useFactory: (configService: ApiConfigService) => ({

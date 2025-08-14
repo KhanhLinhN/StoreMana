@@ -7,6 +7,7 @@ import { UserSubscriber } from './src/entity-subscribers/user-subscriber';
 import { SnakeNamingStrategy } from './src/snake-naming.strategy';
 
 dotenv.config();
+const isProd = process.env.DB_HOST && !['localhost', '127.0.0.1'].includes(process.env.DB_HOST);
 
 export const dataSource = new DataSource({
   type: 'postgres',
@@ -22,4 +23,6 @@ export const dataSource = new DataSource({
     'src/modules/**/*.view-entity{.ts,.js}',
   ],
   migrations: ['src/database/migrations/*{.ts,.js}'],
+    ssl: isProd ? { rejectUnauthorized: false } : false,
 });
+export default dataSource;
