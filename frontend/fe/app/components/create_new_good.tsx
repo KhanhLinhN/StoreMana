@@ -4,21 +4,17 @@ import { useState } from 'react'
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react'
 import { ChevronDownIcon, ExclamationTriangleIcon } from '@heroicons/react/24/outline'
 interface Props {
-  onClose: () => void;
+  showModalCreate: boolean
+  setShowModalCreate: (show: boolean) => void
 }
 
-export default function create_goods({ onClose }: Props) {
-  const [open, setOpen] = useState(false)
+export default function create_goods(props: Props) {
+    const { showModalCreate, setShowModalCreate } = props;
 
   return (
     <div>
-        <button
-        onClick={() => setOpen(true)}
-        className="rounded-md bg-gray-950/5 px-2.5 py-1.5 text-sm font-semibold text-gray-900 hover:bg-gray-950/10"
-      >
-        Open dialog
-      </button>
-      <Dialog open={open} onClose={setOpen} className="relative z-10">
+        
+      <Dialog open={showModalCreate} onClose={() => setShowModalCreate(false)} className="relative z-10">
         <DialogBackdrop
           transition
           className="fixed inset-0 bg-gray-500/75 transition-opacity data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in"
@@ -110,19 +106,19 @@ export default function create_goods({ onClose }: Props) {
                             </div>
                         </div>
                         </div>
-                    <div className="mt-2">
+                    {/* <div className="mt-2">
                       <p className="text-sm text-gray-500">
                         Are you sure you want to deactivate your account? All of your data will be permanently removed.
                         This action cannot be undone.
                       </p>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </div>
               <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
                 <button
                     onClick={() => {
-                        onClose();
+                        setShowModalCreate(false);
                     }}
                     className="px-3 py-1 inline-flex w-full justify-center bg-green-500 text-white rounded hover:bg-green-600 sm:mt-0 sm:w-auto"
                 >
@@ -131,7 +127,7 @@ export default function create_goods({ onClose }: Props) {
                 <button
                   type="button"
                   data-autofocus
-                  onClick={() => setOpen(false)}
+                  onClick={() => setShowModalCreate(false)}
                   className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-xs inset-ring inset-ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
                 >
                   Cancel

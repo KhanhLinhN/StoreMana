@@ -9,6 +9,7 @@ const products = [
     name: 'Earthen Bottle',
     href: '#',
     price: '$48',
+    stock: '$48',
     imageSrc: 'https://tailwindcss.com/plus-assets/img/ecommerce-images/category-page-04-image-card-01.jpg',
     imageAlt: 'Tall slender porcelain bottle with natural clay textured body and cork stopper.',
   },
@@ -71,19 +72,19 @@ const products = [
 ]
 
 export default function avai_goods_list() {
-      const [open, setOpen] = useState(false)
+      const [showModalCreate, setShowModalCreate] = useState(false)
   return (
     <div className="relative isolate overflow-hidden py-5 sm:py-5 lg:py-5">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none">
           <div className="max-w-xl lg:max-w-lg">
               <h2 className="text-2xl font-semibold tracking-tight">Available goods list</h2>
-              <button onClick={() => setOpen(true)}
+              <button onClick={() => setShowModalCreate(true)}
                 className="flex-none rounded-md bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-indigo-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
               >
                 + Add product
               </button>
-                    <CreateGoods onClose={() => setOpen(true)} />
+                    <CreateGoods  showModalCreate={showModalCreate} setShowModalCreate={setShowModalCreate} />
             <div className="mt-2 flex max-w-md gap-x-4">
               <input
                 id="goodsName"
@@ -117,7 +118,7 @@ export default function avai_goods_list() {
                 className="aspect-square w-full rounded-lg bg-gray-200 object-cover group-hover:opacity-75 xl:aspect-7/8"
               />
               <h3 className="mt-4 text-sm text-gray-700">{product.name}</h3>
-              <p className="mt-1 text-lg font-medium text-gray-900">{product.price}</p>
+              <p className="mt-1 text-lg font-medium text-gray-900">{product.price} - {product.stock}</p>
             </a>
           ))}
         </div>
