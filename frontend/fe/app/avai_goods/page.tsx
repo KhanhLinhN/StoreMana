@@ -1,4 +1,7 @@
+'use client'
 import { CalendarDaysIcon, HandRaisedIcon } from '@heroicons/react/24/outline'
+import CreateGoods from '../components/create_new_good'
+import { useState } from 'react'
 
 const products = [
   {
@@ -68,18 +71,19 @@ const products = [
 ]
 
 export default function avai_goods_list() {
+      const [open, setOpen] = useState(false)
   return (
     <div className="relative isolate overflow-hidden py-5 sm:py-5 lg:py-5">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none">
           <div className="max-w-xl lg:max-w-lg">
               <h2 className="text-2xl font-semibold tracking-tight">Available goods list</h2>
-              <button
-                type="submit"
+              <button onClick={() => setOpen(true)}
                 className="flex-none rounded-md bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-indigo-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
               >
                 + Add product
               </button>
+                    <CreateGoods onClose={() => setOpen(true)} />
             <div className="mt-2 flex max-w-md gap-x-4">
               <input
                 id="goodsName"
@@ -117,6 +121,7 @@ export default function avai_goods_list() {
             </a>
           ))}
         </div>
+
       </div>
     </div>
     </div>
