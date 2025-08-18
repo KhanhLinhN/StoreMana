@@ -1,6 +1,11 @@
 import type { MigrationInterface, QueryRunner } from "typeorm";
 
 export class CategoriesTable1755252809372 implements MigrationInterface {
+    name?: string | undefined;
+    transaction?: boolean | undefined;
+    public async down(queryRunner: QueryRunner): Promise<void> {
+        await queryRunner.dropTable('categories');
+    }
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.query(
@@ -14,7 +19,7 @@ export class CategoriesTable1755252809372 implements MigrationInterface {
         );
     }
 
-    public async down(queryRunner: QueryRunner): Promise<void> {
-    }
+    // public async down(queryRunner: QueryRunner): Promise<void> {
+    // }
 
 }

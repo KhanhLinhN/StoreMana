@@ -136,6 +136,7 @@
     "prettier": "^3.5.3",
     "release-it": "^19.0.3",
     "sass-embedded": "^1.89.2",
+    "sequelize-cli": "^6.6.3",
     "supertest": "^7.1.1",
     "tailwindcss": "^4.1.11",
     "taze": "^19.1.0",

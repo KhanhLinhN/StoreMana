@@ -1,6 +1,11 @@
 import type { MigrationInterface, QueryRunner } from "typeorm";
 
 export class Customers1755253114115 implements MigrationInterface {
+    name?: string | undefined;
+    transaction?: boolean | undefined;
+    public async down(queryRunner: QueryRunner): Promise<void> {
+        await queryRunner.dropTable('customers');
+    }
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.query(
@@ -12,13 +17,12 @@ export class Customers1755253114115 implements MigrationInterface {
                 "address" text,
                 "receiver_name" character varying,
                 "created_at" TIMESTAMP NOT NULL DEFAULT now(),
-                "updated_at" TIMESTAMP NOT NULL DEFAULT now(),
-                CONSTRAINT "PK_8a2b1c3f5d6e7f8a9b0c1d2e3f4" PRIMARY KEY ("id")
+                "updated_at" TIMESTAMP NOT NULL DEFAULT now()
             )`
         );
     }
 
-    public async down(queryRunner: QueryRunner): Promise<void> {
-    }
+    // public async down(queryRunner: QueryRunner): Promise<void> {
+    // }
 
 }
